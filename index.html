@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Invitación Especial para Britani ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes estilo garabato / historieta super lindas -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Handlee&display=swap" rel="stylesheet">
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Handlee', cursive, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .title-font {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+
+        input, select, textarea, button {
+            font-size: 16px !important;
+            font-family: 'Handlee', cursive, sans-serif;
+        }
+
+        body {
+            background-color: #0c0f1d;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0);
+            background-size: 24px 24px;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        /* Dibujos flotantes y destellos en segundo plano */
+        .doodle-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        /* Estilo Borde Dibujado a Mano (Sketch / Wavy card) */
+        .sketch-card {
+            background: rgba(15, 23, 42, 0.92);
+            border: 3.5px solid #38bdf8;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 6px 8px 0px rgba(56, 189, 248, 0.3), 0 20px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .sketch-btn {
+            border: 3px solid #38bdf8;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 4px 4px 0px #0284c7;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform, box-shadow;
+            cursor: pointer;
+        }
+
+        .sketch-btn:active {
+            transform: translate(2px, 2px) scale(0.97);
+            box-shadow: 1px 1px 0px #0284c7;
+        }
+
+        /* Borde RGB Dibujado para la música e imagen inferior */
+        .rgb-sketch-wrapper {
+            position: relative;
+            border-radius: 20px 225px 20px 255px/225px 20px 255px 20px;
+            padding: 4px;
+            overflow: hidden;
+            background: #0f172a;
+            box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .rgb-sketch-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -60%;
+            width: 220%;
+            height: 220%;
+            background: conic-gradient(
+                #000000 0deg,
+                #3b82f6 120deg,
+                #ef4444 240deg,
+                #000000 360deg
+            );
+            animation: rotateRGB 3.5s linear infinite;
+        }
+
+        @keyframes rotateRGB {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .rgb-inner-sketch {
+            position: relative;
+            z-index: 1;
+            background: #0f172a;
+            border-radius: 16px;
+        }
+
+        /* Estrellas Fugaces */
+        .shooting-star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(56, 189, 248, 1);
+            animation: animateShootingStar 3s linear infinite;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, #38bdf8, transparent);
+        }
+
+        @keyframes animateShootingStar {
+            0% { transform: rotate(315deg) translateX(0); opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: rotate(315deg) translateX(-600px); opacity: 0; }
+        }
+
+        /* Animación Mezclado Dibujado */
+        .anim-shuffle-1 { animation: mergeShuffle1 3s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .anim-shuffle-2 { animation: mergeShuffle2 3s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .anim-shuffle-3 { animation: mergeShuffle3 3s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+
+        @keyframes mergeShuffle1 {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            20% { transform: translate3d(105%, 0, 0) scale(1.05); }
+            40% { transform: translate3d(-105%, -10px, 0) scale(0.95); }
+            60% { transform: translate3d(105%, 10px, 0) scale(1.05); }
+            80% { transform: translate3d(-105%, 0, 0) scale(0.95); }
+            100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+
+        @keyframes mergeShuffle2 {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            20% { transform: translate3d(0, 0, 0) scale(0.9); }
+            40% { transform: translate3d(0, 15px, 0) scale(1.1); }
+            60% { transform: translate3d(0, -15px, 0) scale(0.9); }
+            80% { transform: translate3d(0, 10px, 0) scale(1.05); }
+            100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+
+        @keyframes mergeShuffle3 {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            20% { transform: translate3d(-105%, 0, 0) scale(1.05); }
+            40% { transform: translate3d(105%, 10px, 0) scale(0.95); }
+            60% { transform: translate3d(-105%, -10px, 0) scale(1.05); }
+            80% { transform: translate3d(105%, 0, 0) scale(0.95); }
+            100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+
+        /* Texto RGB Animado para el pie de página */
+        .rgb-text {
+            background: linear-gradient(90deg, #ffd166, #38bdf8, #ef4444, #ffd166);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: animateRGBText 3s linear infinite;
+        }
+
+        @keyframes animateRGBText {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Estilos RGB individuales para cada caja de regalo */
+        .box-rgb-yellow {
+            border-color: #facc15 !important;
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.4), 3px 4px 0px #ca8a04 !important;
+        }
+
+        .box-rgb-blue {
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4), 3px 4px 0px #0284c7 !important;
+        }
+
+        .box-rgb-red {
+            border-color: #f87171 !important;
+            box-shadow: 0 0 12px rgba(248, 113, 113, 0.4), 3px 4px 0px #dc2626 !important;
+        }
+
+        /* Ocultar iframe de audio */
+        .hidden-audio-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+            left: -9999px;
+        }
+
+        /* Modal Overlay Estilo Dibujo */
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(6, 9, 19, 0.88);
+            backdrop-filter: blur(8px);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: scale(0.9);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        .sketch-badge {
+            border: 2px dashed #38bdf8;
+            border-radius: 12px;
+            padding: 2px 8px;
+        }
+
+        /* Visibilidad de Paneles */
+        .panel-visible {
+            display: flex;
+        }
+
+        .panel-hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-between p-4 min-h-screen text-slate-100">
+
+    <!-- Fondo de Dibujos y Estrellas -->
+    <div id="doodles-bg" class="doodle-container"></div>
+
+    <!-- Encabezado con Nombre BRITANI Enlazado a Instagram -->
+    <div class="z-50 my-2">
+        <a href="https://www.instagram.com/bribri_617?obrf=M3N1OXkyeHdkdjRn" target="_blank" rel="noopener noreferrer" class="sketch-btn bg-slate-900 border-2 border-cyan-400 px-4 py-1.5 rounded-full text-cyan-300 font-bold title-font text-sm shadow-lg flex items-center space-x-1.5 hover:scale-105 transition-transform active:scale-95">
+            <span>✨</span>
+            <span class="tracking-wide">BRITANI</span>
+            <span class="text-xs text-cyan-400">↗</span>
+        </a>
+    </div>
+
+    <!-- Botón Mute/Unmute Estilo Dibujo Fijo Top-Right -->
+    <div class="fixed top-4 right-4 z-50 flex items-center">
+        <button id="music-btn" onclick="toggleAudio()" class="sketch-btn bg-slate-900 border-2 border-cyan-400 p-3 rounded-full text-cyan-300 shadow-lg transition-all active:scale-90 flex items-center justify-center">
+            <svg id="svg-play-icon" class="w-5 h-5 fill-none stroke-cyan-300 stroke-[2.5] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <svg id="svg-pause-icon" class="w-5 h-5 fill-none stroke-cyan-300 stroke-[2.5] stroke-linecap-round stroke-linejoin-round hidden" viewBox="0 0 24 24">
+                <line x1="10" y1="4" x2="10" y2="20"></line>
+                <line x1="14" y1="4" x2="14" y2="20"></line>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Reproductor YouTube Oculto y Reproductor de Respaldo Nativ o -->
+    <div id="youtube-audio-container" class="hidden-audio-player">
+        <div id="youtube-player"></div>
+        <audio id="backup-audio" loop preload="auto">
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-music-112275.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Contenedor Principal Card Estilo Dibujo Lindo -->
+    <div class="w-full max-w-sm sketch-card p-6 text-center relative z-10 overflow-hidden min-h-[500px] flex flex-col justify-center border-3 my-auto">
+        
+        <!-- Modal de Confirmación de Regalo Dibujado -->
+        <div id="confirm-modal" class="modal-overlay">
+            <div class="bg-slate-900 border-3 border-cyan-400 rounded-3xl p-5 text-center space-y-4 max-w-xs w-full shadow-2xl sketch-card">
+                <div class="text-5xl animate-bounce">🎁✨</div>
+                <h3 class="title-font text-lg font-bold text-cyan-300 leading-snug">
+                    ¿Segura quieres este regalo?
+                </h3>
+                <p class="text-sm text-cyan-100/90 font-medium">
+                    Solo tendrás 1 oportunidad 🤫✏️
+                </p>
+                <div class="flex flex-col space-y-2.5 pt-2">
+                    <button onclick="confirmarEleccionRegalo()" class="w-full py-2.5 px-4 bg-cyan-500 hover:bg-cyan-400 text-slate-900 title-font font-bold text-sm sketch-btn border-2 border-cyan-200">
+                        ¡Sí, acepto este! 💖
+                    </button>
+                    <button onclick="cancelarEleccionRegalo()" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-cyan-200 title-font font-semibold text-sm sketch-btn border-2 border-slate-600">
+                        Elegir otro 🔄
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PANEL 1: INICIO ================= -->
+        <div id="panel-1" class="panel-visible flex-col items-center justify-center space-y-4">
+            
+            <!-- Imagen Perfil Inicial Circular Dibujada -->
+            <div class="relative my-1 mx-auto">
+                <div class="absolute -inset-1.5 bg-cyan-400 rounded-full blur opacity-60"></div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9CgDBsiOyeHfL10lhaVgfFhSzYC25jCe4Z7k7Kr_dsw&s=10" 
+                     alt="Perfil Britani" 
+                     class="relative w-28 h-28 rounded-full object-cover border-4 border-cyan-300 shadow-xl mx-auto p-0.5 bg-slate-900"
+                     onerror="this.src='https://placehold.co/110x110/1e293b/38bdf8?text=Britani'">
+            </div>
+
+            <!-- Cuadro de Música Estilo Dibujo con Borde RGB -->
+            <div class="rgb-sketch-wrapper w-full max-w-[260px] mx-auto my-1">
+                <div class="rgb-inner-sketch p-3 flex items-center justify-between space-x-3">
+                    <div class="flex items-center space-x-2.5 overflow-hidden">
+                        <!-- Portada Giratoria de la Música -->
+                        <div class="w-10 h-10 rounded-full bg-slate-900 border-2 border-cyan-400 overflow-hidden flex-shrink-0 animate-spin" style="animation-duration: 6s;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7VeKgsX0wgoUUOgXPtpTGgwZO-Hcmv9SKzp9-7iz6gA&s=10" 
+                                 alt="Portada Música" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-left overflow-hidden">
+                            <p class="text-[10px] uppercase tracking-wider text-cyan-400 font-bold title-font">Música especial</p>
+                            <p class="text-xs text-slate-200 font-semibold truncate">Canción para Britani</p>
+                        </div>
+                    </div>
+                    <!-- Botón Reproducir / Pausa en SVG Cian Neón -->
+                    <button onclick="toggleAudio()" aria-label="Reproducir o pausar música" class="text-cyan-300 hover:text-white p-2 rounded-xl transition-transform active:scale-95 flex items-center justify-center bg-cyan-950/60 border border-cyan-500/40">
+                        <svg id="svg-play-icon" class="w-5 h-5 fill-none stroke-cyan-300 stroke-[2.5] stroke-linecap-round stroke-linejoin-round hidden" viewBox="0 0 24 24">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <svg id="svg-pause-icon" class="w-5 h-5 fill-none stroke-cyan-300 stroke-[2.5] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 24 24">
+                            <line x1="10" y1="4" x2="10" y2="20"></line>
+                            <line x1="14" y1="4" x2="14" y2="20"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mensaje -->
+            <div class="space-y-1">
+                <h2 class="title-font text-lg font-bold text-cyan-300 tracking-wide uppercase">
+                    ¡Holis BRITANI!
+                </h2>
+                <p class="text-sm text-slate-200 font-medium leading-relaxed px-1">
+                    Hoy quiero invitarte a salir, así que tú eliges tu regalo
+                </p>
+            </div>
+
+            <!-- Barra de Carga Inicial que Inicia Automáticamente -->
+            <div class="w-full max-w-xs mx-auto mt-2 space-y-2">
+                <div id="wrapper-carga-3seg" class="flex flex-col items-center space-y-2 w-full pt-1">
+                    <img src="https://kilermt.com/wp-content/uploads/2018/01/cargando.gif" alt="Cargando..." class="w-12 h-12 object-contain mx-auto">
+                    <div class="w-full bg-slate-900 rounded-full h-4 border-2 border-cyan-400 overflow-hidden p-0.5 shadow-inner">
+                        <div id="bar-carga-3seg" class="bg-gradient-to-r from-amber-300 via-cyan-400 to-blue-500 h-full rounded-full transition-all duration-100 ease-out" style="width: 0%"></div>
+                    </div>
+                    <p id="text-carga-3seg" class="title-font text-xs font-bold text-cyan-300 tracking-wide">Preparando experiencia... 0%</p>
+                </div>
+
+                <!-- Botón Inicial (Aparece tras el 100% de la barra de carga, sin emojis) -->
+                <button id="btn-iniciar-elegir" onclick="iniciarConexion()" class="hidden w-full py-3 px-6 bg-cyan-400 hover:bg-cyan-300 text-slate-950 title-font font-bold text-sm sketch-btn border-2 border-cyan-100 transition-transform active:scale-95">
+                    Toca aquí para elegir
+                </button>
+            </div>
+
+        </div>
+
+        <!-- ================= PANEL INTERMEDIO: CARGA DE CONEXIÓN (7 SEG) ================= -->
+        <div id="panel-intermedio" class="panel-hidden flex-col items-center justify-center space-y-5">
+            <div class="relative">
+                <img src="https://kilermt.com/wp-content/uploads/2018/01/cargando.gif" alt="Cargando..." class="w-16 h-16 object-contain mx-auto">
+            </div>
+            <div class="space-y-1 text-center px-2">
+                <h3 class="title-font text-base font-bold text-cyan-300">
+                    Conectando con Britani...
+                </h3>
+                <p class="text-xs text-slate-300 font-medium">
+                    esperando conexión espera solo unos segundos ⏳✨
+                </p>
+            </div>
+            <div class="w-full bg-slate-900 rounded-full h-4 border-2 border-cyan-400 overflow-hidden p-0.5 shadow-inner">
+                <div id="conn-progress-bar" class="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 h-full rounded-full transition-all duration-100 ease-out" style="width: 0%"></div>
+            </div>
+            <p id="conn-progress-text" class="title-font text-xs font-bold text-cyan-300 tracking-wide">0%</p>
+        </div>
+
+        <!-- ================= PANEL 2: MEZCLADO Y SELECCIÓN ================= -->
+        <div id="panel-2" class="panel-hidden flex-col items-center justify-center space-y-6">
+            <div>
+                <h3 id="shuffle-title" class="title-font text-lg font-bold text-cyan-300 leading-tight">
+                    ¡Mezclando los regalos...! 🔀
+                </h3>
+                <p id="shuffle-subtitle" class="text-xs text-slate-300 mt-1">
+                    ¡Sigue la caja de tu intuición! ✨
+                </p>
+            </div>
+
+            <!-- Cajas de Regalo Dibujadas -->
+            <div class="flex justify-center items-center space-x-3 py-6 w-full px-2">
+                <button onclick="seleccionarRegalo(0)" class="gift-box box-rgb-yellow sketch-btn p-3 bg-slate-800 hover:bg-slate-700 border-3 rounded-2xl flex-1 max-w-[95px] h-32 flex flex-col items-center justify-center shadow-lg">
+                    <span class="text-5xl filter drop-shadow transform hover:scale-110 transition duration-200">🎁</span>
+                </button>
+                <button onclick="seleccionarRegalo(1)" class="gift-box box-rgb-blue sketch-btn p-3 bg-slate-800 hover:bg-slate-700 border-3 rounded-2xl flex-1 max-w-[95px] h-32 flex flex-col items-center justify-center shadow-lg">
+                    <span class="text-5xl filter drop-shadow transform hover:scale-110 transition duration-200">🎁</span>
+                </button>
+                <button onclick="seleccionarRegalo(2)" class="gift-box box-rgb-red sketch-btn p-3 bg-slate-800 hover:bg-slate-700 border-3 rounded-2xl flex-1 max-w-[95px] h-32 flex flex-col items-center justify-center shadow-lg">
+                    <span class="text-5xl filter drop-shadow transform hover:scale-110 transition duration-200">🎁</span>
+                </button>
+            </div>
+
+            <!-- Imagen Decorativa Rectangular Debajo de los Regalos con Borde RGB -->
+            <div class="rgb-sketch-wrapper w-full max-w-[260px] mx-auto my-2 rounded-2xl p-1 shadow-xl">
+                <div class="rgb-inner-sketch w-full h-28 rounded-xl overflow-hidden flex items-center justify-center bg-slate-900">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVzhxvse5FTAwtFRQJBuQbFCo-daLy9eXRaygCJQNf6w&s=10" 
+                         alt="Detalle Regalos" 
+                         class="w-full h-full object-cover rounded-xl"
+                         onerror="this.src='https://placehold.co/260x110/1e293b/38bdf8?text=Regalo'">
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PANEL 3: RESULTADO DE REGALO ================= -->
+        <div id="panel-3" class="panel-hidden flex-col items-center justify-center space-y-4">
+            <span class="title-font text-xs font-semibold uppercase tracking-wider text-cyan-300 sketch-badge bg-cyan-950/80">
+                ¡Premio Revelado! 🎉
+            </span>
+
+            <!-- Imagen Circular del Premio Ganado -->
+            <div class="relative my-1">
+                <div class="absolute -inset-1.5 bg-cyan-400 rounded-full blur opacity-60"></div>
+                <img id="prize-img" src="" alt="Premio" class="relative w-28 h-28 rounded-full object-cover border-4 border-cyan-300 shadow-xl mx-auto p-0.5 bg-slate-900">
+            </div>
+
+            <!-- Título y Texto Extendido del Premio -->
+            <div class="space-y-2 px-1">
+                <h3 id="prize-title" class="title-font text-base font-bold text-cyan-200 leading-snug">
+                    <!-- Se llena dinámicamente -->
+                </h3>
+                <p id="prize-description" class="text-xs text-slate-300 leading-relaxed font-medium">
+                    <!-- Se llena dinámicamente -->
+                </p>
+            </div>
+
+            <!-- Botón Enviar Resultado -->
+            <button onclick="iniciarCarga()" class="w-full max-w-xs py-3 px-6 bg-cyan-400 hover:bg-cyan-300 text-slate-950 title-font font-bold text-sm sketch-btn border-2 border-cyan-100 mt-2">
+                Enviar resultado 🚀
+            </button>
+        </div>
+
+        <!-- ================= PANEL 4: CARGA ================= -->
+        <div id="panel-4" class="panel-hidden flex-col items-center justify-center space-y-5">
+            <img src="https://kilermt.com/wp-content/uploads/2018/01/cargando.gif" alt="Cargando..." class="w-16 h-16 object-contain mx-auto">
+            <h3 class="title-font text-base font-bold text-cyan-300">
+                Procesando tu regalo...
+            </h3>
+            
+            <div class="w-full bg-slate-900 rounded-full h-4 border-2 border-cyan-400 overflow-hidden p-0.5">
+                <div id="progress-bar" class="bg-gradient-to-r from-cyan-400 to-blue-400 h-full rounded-full transition-all duration-100 ease-out" style="width: 0%"></div>
+            </div>
+            
+            <p id="progress-text" class="title-font text-sm font-bold text-cyan-300">0%</p>
+        </div>
+
+        <!-- ================= PANEL 5: FECHA Y HORARIO ================= -->
+        <div id="panel-5" class="panel-hidden flex-col items-center justify-center space-y-4">
+            <h3 class="title-font text-lg font-bold text-cyan-300 leading-snug">
+                ¡Casi listo! 🗓️✏️
+            </h3>
+            <p class="text-xs text-slate-200 leading-relaxed px-1">
+                Necesito una fecha y hora para ponernos de acuerdo e ir por tu regalo ✨
+            </p>
+
+            <form onsubmit="guardarFechaHora(event)" class="w-full space-y-3 pt-1">
+                
+                <!-- Campos ocultos para enviar a Formspree -->
+                <input type="hidden" name="Premio Elegido" id="formspree-prize">
+
+                <!-- Selector Compacto de Fecha -->
+                <div class="flex flex-col items-center">
+                    <label class="title-font text-xs font-semibold text-cyan-300 mb-1">¿Qué día prefieres?</label>
+                    <input type="date" id="input-date" name="Fecha Seleccionada" required class="w-48 bg-slate-800 text-cyan-100 text-xs font-semibold px-3 py-2 rounded-xl border-2 border-cyan-400 text-center sketch-btn">
+                </div>
+
+                <!-- Barra para Escribir Horario/Notas Obligatoria -->
+                <div class="flex flex-col items-center">
+                    <label class="title-font text-xs font-semibold text-cyan-300 mb-1">¿A qué hora podemos vernos? *</label>
+                    <input type="text" id="input-time" name="Horario y Notas" placeholder="Ej: A las 6:00 PM o al salir..." required class="w-full bg-slate-800 text-cyan-100 text-xs px-3 py-2.5 rounded-xl border-2 border-cyan-400 placeholder-slate-400 text-center sketch-btn">
+                </div>
+
+                <button id="btn-submit-form" type="submit" class="w-full py-3 px-6 bg-cyan-400 hover:bg-cyan-300 text-slate-950 title-font font-bold text-sm sketch-btn border-2 border-cyan-100 mt-2">
+                    Enviar regalo seleccionado 💌
+                </button>
+            </form>
+        </div>
+
+        <!-- ================= PANEL 6: ENVIADO ================= -->
+        <div id="panel-6" class="panel-hidden flex-col items-center justify-center space-y-4">
+            
+            <!-- Imagen Perfil de Confirmación Circular Dibujada -->
+            <div class="relative my-1">
+                <div class="absolute -inset-1 bg-green-400 rounded-full blur opacity-60"></div>
+                <img src="https://thumbs.dreamstime.com/b/mensaje-enviado-con-%C3%A9xito-por-correo-electr%C3%B3nico-icono-verificado-una-ilustraci%C3%B3n-simple-y-limpia-de-un-sobre-abierto-marca-391448142.jpg" 
+                     alt="Enviado" 
+                     class="relative w-24 h-24 rounded-full object-cover border-4 border-cyan-300 shadow-xl mx-auto p-0.5 bg-slate-900"
+                     onerror="this.src='https://placehold.co/100x100/1e293b/38bdf8?text=Enviado'">
+            </div>
+
+            <h3 class="title-font text-lg font-bold text-cyan-300">
+                ¡Todo listo! ✨✉️
+            </h3>
+
+            <p class="text-sm text-slate-200 leading-relaxed px-2">
+                Tu regalo seleccionado ha sido enviado 📩🥰
+            </p>
+
+            <!-- Botón Ver Todo Otra Vez -->
+            <button onclick="reiniciarJuego()" class="w-full max-w-xs py-3 px-6 bg-slate-800 hover:bg-slate-700 text-cyan-300 title-font font-bold text-xs sketch-btn border-2 border-cyan-400 mt-2">
+                Ver todo otra vez 🔄
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Pie de Página / Crédito de Autor con Enlace Instagram -->
+    <div class="z-50 my-2 text-center">
+        <p class="text-xs text-slate-400 font-medium">
+            This website was created by 
+            <a href="https://www.instagram.com/yeison.ae?srtk=MWI3bGVrNGRoY3IxYg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="rgb-text font-bold hover:underline transition-all">
+                yeison.ae ↗
+            </a>
+        </p>
+    </div>
+
+    <script>
+        const PREMIOS = [
+            {
+                nombre: "McDonald's",
+                titulo: "¡Felicitaciones por ganarte un McDonald’s! 🍔",
+                descripcion: "Prepárate para disfrutar de unas deliciosas hamburguesas y papitas crocantes. ¡Pasaremos un rato súper divertido platicando y comiendo rico!",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbg7fpf1T7jkJuR7_puzRyCNeiPun2Xw7RN27B1CwDkw&s=10"
+            },
+            {
+                nombre: "Burger King",
+                titulo: "¡Felicitaciones te ganaste un buen King! 👑",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrb8kPOt96joIz3H2D6RD9olXlxSwDuBUHUWu-T7O2NdX6g3sb4hIHv18&s=10",
+                descripcion: "¡Un combo a la parrilla solo para la reina! Te espera una salida genial llena de risas, buen ambiente y una comida deliciosa."
+            },
+            {
+                nombre: "Helado",
+                titulo: "¡Felicitaciones por ganarte un helado! 🍦",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmXHsfQh5nLzMEwKLwyKcqsW-Ps9TCUHwwqbfArdYJow&s=10",
+                descripcion: "¡El plan perfecto para endulzar el día! Vamos por tu sabor favorito y a pasar un momento increíble juntos."
+            }
+        ];
+
+        let opcionesMezcladas = [];
+        let premioSeleccionado = null;
+        let indiceTemp = null;
+        let sePuedeElegir = false;
+        let isPlaying = false;
+        let player = null;
+        let ytReady = false;
+
+        // Cargar API IFrame de YouTube de forma dinámica
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '1',
+                width: '1',
+                videoId: 'IryOLXtyTRU',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'IryOLXtyTRU',
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            ytReady = true;
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                actualizarIconosAudio(false);
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                isPlaying = false;
+                actualizarIconosAudio(true);
+            }
+        }
+
+        function intentarAutoplay() {
+            if (!isPlaying) {
+                reproducirAudio();
+            }
+        }
+
+        function reproducirAudio() {
+            if (ytReady && player && typeof player.playVideo === 'function') {
+                try {
+                    player.unMute();
+                    player.playVideo();
+                    isPlaying = true;
+                    actualizarIconosAudio(false);
+                    return;
+                } catch (e) {
+                    console.log("Error al reproducir YouTube, usando audio de respaldo");
+                }
+            }
+            // Audio de respaldo si YouTube falla o tarda en cargar
+            const backupAudio = document.getElementById('backup-audio');
+            if (backupAudio) {
+                backupAudio.play().then(() => {
+                    isPlaying = true;
+                    actualizarIconosAudio(false);
+                }).catch(() => {});
+            }
+        }
+
+        function pausarAudio() {
+            if (ytReady && player && typeof player.pauseVideo === 'function') {
+                try {
+                    player.pauseVideo();
+                } catch(e){}
+            }
+            const backupAudio = document.getElementById('backup-audio');
+            if (backupAudio) {
+                backupAudio.pause();
+            }
+            isPlaying = false;
+            actualizarIconosAudio(true);
+        }
+
+        function toggleAudio() {
+            if (isPlaying) {
+                pausarAudio();
+            } else {
+                reproducirAudio();
+            }
+        }
+
+        function actualizarIconosAudio(estaPausado) {
+            const svgPlay = document.getElementById('svg-play-icon');
+            const svgPause = document.getElementById('svg-pause-icon');
+            if (!svgPlay || !svgPause) return;
+
+            if (estaPausado) {
+                svgPlay.classList.remove('hidden');
+                svgPause.classList.add('hidden');
+            } else {
+                svgPlay.classList.add('hidden');
+                svgPause.classList.remove('hidden');
+            }
+        }
+
+        function mostrarPanel(id) {
+            intentarAutoplay();
+            const paneles = [1, 'intermedio', 2, 3, 4, 5, 6];
+            paneles.forEach(pId => {
+                const targetId = `panel-${pId}`;
+                const p = document.getElementById(targetId);
+                if (p) {
+                    if (pId === id) {
+                        p.classList.remove('panel-hidden');
+                        p.classList.add('panel-visible');
+                    } else {
+                        p.classList.remove('panel-visible');
+                        p.classList.add('panel-hidden');
+                    }
+                }
+            });
+        }
+
+        function iniciarCarga3Seg() {
+            const btn = document.getElementById('btn-iniciar-elegir');
+            const wrapperCarga = document.getElementById('wrapper-carga-3seg');
+            const barCarga = document.getElementById('bar-carga-3seg');
+            const textCarga = document.getElementById('text-carga-3seg');
+
+            if (btn) btn.classList.add('hidden');
+            if (wrapperCarga) {
+                wrapperCarga.classList.remove('hidden');
+                wrapperCarga.classList.add('flex');
+            }
+
+            let duracion = 3000;
+            let inicio = null;
+
+            function animar3Seg(timestamp) {
+                if (!inicio) inicio = timestamp;
+                let transcurrido = timestamp - inicio;
+                let porcentaje = Math.min(Math.floor((transcurrido / duracion) * 100), 100);
+
+                if (barCarga) barCarga.style.width = `${porcentaje}%`;
+                if (textCarga) textCarga.innerText = `Preparando experiencia... ${porcentaje}%`;
+
+                if (transcurrido < duracion) {
+                    requestAnimationFrame(animar3Seg);
+                } else {
+                    setTimeout(() => {
+                        if (wrapperCarga) {
+                            wrapperCarga.classList.add('hidden');
+                            wrapperCarga.classList.remove('flex');
+                        }
+                        if (btn) {
+                            btn.classList.remove('hidden');
+                        }
+                    }, 300);
+                }
+            }
+
+            requestAnimationFrame(animar3Seg);
+        }
+
+        function iniciarConexion() {
+            intentarAutoplay();
+            mostrarPanel('intermedio');
+
+            const progressBar = document.getElementById('conn-progress-bar');
+            const progressText = document.getElementById('conn-progress-text');
+            
+            let duracion = 7000;
+            let inicio = null;
+
+            function animarCargaConexion(timestamp) {
+                if (!inicio) inicio = timestamp;
+                let transcurrido = timestamp - inicio;
+                let porcentaje = Math.min(Math.floor((transcurrido / duracion) * 100), 100);
+
+                if (progressBar) progressBar.style.width = `${porcentaje}%`;
+                if (progressText) progressText.innerText = `${porcentaje}%`;
+
+                if (transcurrido < duracion) {
+                    requestAnimationFrame(animarCargaConexion);
+                } else {
+                    setTimeout(() => {
+                        iniciarJuego();
+                    }, 300);
+                }
+            }
+
+            requestAnimationFrame(animarCargaConexion);
+        }
+
+        function iniciarJuego() {
+            mostrarPanel(2);
+            sePuedeElegir = false;
+            
+            opcionesMezcladas = [...PREMIOS].sort(() => Math.random() - 0.5);
+
+            const giftBoxes = document.querySelectorAll('.gift-box');
+            
+            document.getElementById('shuffle-title').innerText = "¡Mezclando los regalos...! 🔀";
+            document.getElementById('shuffle-subtitle').innerText = "¡Sigue la caja de tu intuición! ✨";
+
+            giftBoxes[0].classList.add('anim-shuffle-1');
+            giftBoxes[1].classList.add('anim-shuffle-2');
+            giftBoxes[2].classList.add('anim-shuffle-3');
+
+            setTimeout(() => {
+                giftBoxes[0].classList.remove('anim-shuffle-1');
+                giftBoxes[1].classList.remove('anim-shuffle-2');
+                giftBoxes[2].classList.remove('anim-shuffle-3');
+
+                document.getElementById('shuffle-title').innerText = "¡Listo! ✨";
+                document.getElementById('shuffle-subtitle').innerText = "Toca la caja que elijas";
+                
+                sePuedeElegir = true;
+            }, 3000);
+        }
+
+        function seleccionarRegalo(index) {
+            if (!sePuedeElegir) return;
+            intentarAutoplay();
+            indiceTemp = index;
+            document.getElementById('confirm-modal').classList.add('active');
+        }
+
+        function confirmarEleccionRegalo() {
+            document.getElementById('confirm-modal').classList.remove('active');
+            if (indiceTemp !== null) {
+                premioSeleccionado = opcionesMezcladas[indiceTemp];
+
+                document.getElementById('prize-img').src = premioSeleccionado.imagen;
+                document.getElementById('prize-title').innerText = premioSeleccionado.titulo;
+                document.getElementById('prize-description').innerText = premioSeleccionado.descripcion || '';
+
+                // Asignar nombre del premio al input oculto de Formspree
+                const formspreePrizeInput = document.getElementById('formspree-prize');
+                if (formspreePrizeInput) {
+                    formspreePrizeInput.value = premioSeleccionado.nombre;
+                }
+
+                mostrarPanel(3);
+            }
+        }
+
+        function cancelarEleccionRegalo() {
+            document.getElementById('confirm-modal').classList.remove('active');
+            indiceTemp = null;
+        }
+
+        function iniciarCarga() {
+            intentarAutoplay();
+            mostrarPanel(4);
+
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            let duracion = 3000;
+            let inicio = null;
+
+            function animarCarga(timestamp) {
+                if (!inicio) inicio = timestamp;
+                let transcurrido = timestamp - inicio;
+                let porcentaje = Math.min(Math.floor((transcurrido / duracion) * 100), 100);
+
+                if (progressBar) progressBar.style.width = `${porcentaje}%`;
+                if (progressText) progressText.innerText = `${porcentaje}%`;
+
+                if (transcurrido < duracion) {
+                    requestAnimationFrame(animarCarga);
+                } else {
+                    setTimeout(() => {
+                        mostrarPanel(5);
+                    }, 300);
+                }
+            }
+
+            requestAnimationFrame(animarCarga);
+        }
+
+        async function guardarFechaHora(e) {
+            e.preventDefault();
+            const fechaInput = document.getElementById('input-date');
+            const horaInput = document.getElementById('input-time');
+            const btnSubmit = document.getElementById('btn-submit-form');
+
+            if (!fechaInput.value || !horaInput.value.trim()) {
+                return;
+            }
+
+            if (btnSubmit) {
+                btnSubmit.disabled = true;
+                btnSubmit.innerText = "Enviando... ⏳";
+            }
+
+            const formData = new FormData();
+            formData.append("Regalo Elegido", premioSeleccionado ? premioSeleccionado.nombre : "No especificado");
+            formData.append("Fecha Preferida", fechaInput.value);
+            formData.append("Horario / Mensaje", horaInput.value);
+
+            try {
+                await fetch("https://formspree.io/f/xlgodlzp", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+            } catch (err) {
+                console.log("Error al enviar con Formspree:", err);
+            } finally {
+                if (btnSubmit) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerText = "Enviar regalo seleccionado 💌";
+                }
+                mostrarPanel(6);
+            }
+        }
+
+        function reiniciarJuego() {
+            mostrarPanel(1);
+            
+            const btn = document.getElementById('btn-iniciar-elegir');
+            const wrapperCarga = document.getElementById('wrapper-carga-3seg');
+            if (btn) btn.classList.add('hidden');
+            if (wrapperCarga) {
+                wrapperCarga.classList.remove('hidden');
+                wrapperCarga.classList.add('flex');
+            }
+
+            document.getElementById('input-date').value = '';
+            document.getElementById('input-time').value = '';
+
+            iniciarCarga3Seg();
+        }
+
+        window.onload = function() {
+            iniciarCarga3Seg();
+            document.addEventListener('click', intentarAutoplay, { once: true });
+            document.addEventListener('touchstart', intentarAutoplay, { once: true });
+            document.addEventListener('pointerdown', intentarAutoplay, { once: true });
+        };
+    </script>
+</body>
+</html>
